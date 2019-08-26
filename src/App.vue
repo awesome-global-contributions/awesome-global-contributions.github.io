@@ -1,28 +1,19 @@
 <template>
-    <div id="app">
-        <ProjectList :projects="projects"/>
+  <div id="app">
+    <div class="main">
+      <router-view></router-view>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import ProjectList from './components/ProjectList.vue'
-import Project from './dataobjects/Project'
-import { getEmptyProjectsMap, ProjectsMap } from './dataobjects/Project'
-import { requestAllProjects } from './modules/RequestAllProjects'
+  import { Component, Vue } from 'vue-property-decorator'
 
-@Component({
+  @Component({
     components: {
-        ProjectList,
     },
-})
-export default class App extends Vue {
-    public projects: ProjectsMap = getEmptyProjectsMap()
-
-    public mounted() {
-        requestAllProjects().then((projects) => this.projects = projects)
-    }
-}
+  })
+  export default class App extends Vue { }
 </script>
 
 <style lang="stylus">
