@@ -1,27 +1,19 @@
 <template>
   <div id="app">
-    <ProjectList :projects="projects"/>
+    <div class="main">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import ProjectList from './components/ProjectList.vue'
-import Project from './dataobjects/Project'
-import { requestAllProjects } from './modules/RequestAllProjects'
+  import { Component, Vue } from 'vue-property-decorator'
 
-@Component({
-  components: {
-    ProjectList,
-  },
-})
-export default class App extends Vue {
-  public projects: Project[] = []
-
-  public mounted() {
-    this.projects = requestAllProjects()
-  }
-}
+  @Component({
+    components: {
+    },
+  })
+  export default class App extends Vue { }
 </script>
 
 <style lang="stylus">
