@@ -1,14 +1,4 @@
-interface LinkInformation {
-    name: string
-    description?: string
-    link: string
-}
-
-interface ContributionRequestInformation {
-    url: string
-    format: string
-    accessor: string
-}
+import ProjectJson, { ContributionRequestInformation, LinkInformation } from './ProjectJson'
 
 export default class Project {
     // necessary properties
@@ -37,7 +27,7 @@ export default class Project {
 
     // constructor
     constructor(
-        {   // necessary
+        {
             name, description, license, programmingLanguages,
             rating, repoUrl, websiteUrl, sdgs,
             // generated
@@ -46,29 +36,7 @@ export default class Project {
             // optional
             ratingComment, otherLinks, frameworksUsed,
             licenseUrl, naturalLanguages, naturalLanguagesLink,
-        }:
-        {
-            name: string,
-            description: string,
-            license: string,
-            programmingLanguages: string[],
-            rating: number,
-            repoUrl: string,
-            websiteUrl: string,
-            sdgs: number[],
-            // generated
-            contributionGuidelinesUrl?: string,
-            logoUrl?: string,
-            starsUrl?: string,
-            numberContributors?: ContributionRequestInformation,
-            // optional
-            ratingComment?: string,
-            otherLinks?: LinkInformation[],
-            frameworksUsed?: string[],
-            licenseUrl?: string,
-            naturalLanguages?: string[],
-            naturalLanguagesLink?: string,
-        }) {
+        }: ProjectJson) {
         this.name = name
         this.description = description
         this.license = license
@@ -77,11 +45,13 @@ export default class Project {
         this.repoUrl = repoUrl
         this.websiteUrl = websiteUrl
         this.sdgs = sdgs
+
         // generated
         this.contributionGuidelinesUrl = contributionGuidelinesUrl
         this.logoUrl = logoUrl
         this.starsUrl = starsUrl
         this.numberContributors = numberContributors
+
         // optional
         this.ratingComment = ratingComment
         this.otherLinks = otherLinks
