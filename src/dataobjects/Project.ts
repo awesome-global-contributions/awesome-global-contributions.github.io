@@ -1,3 +1,5 @@
+import ProjectJson from './ProjectJson'
+
 export default class Project {
     // necessary properties
     public name: string
@@ -26,18 +28,15 @@ export default class Project {
 
     // constructor
     constructor(
-        {name, description, license, programmingLanguages,
-            rating, repoUrl, websiteUrl, sdgs}:
         {
-            name: string,
-            description: string,
-            license: string,
-            programmingLanguages: string[],
-            rating: number,
-            repoUrl: string,
-            websiteUrl: string,
-            sdgs: number[],
-        }) {
+            name, description, license, programmingLanguages,
+            rating, repoUrl, websiteUrl, sdgs,
+            // generated
+            contributionGuidelinesUrl, logoUrl, starsUrl,
+            numberContributors,
+            // optional
+            frameworksUsed, licenseUrl, naturalLanguages,
+        }: ProjectJson) {
         this.name = name
         this.description = description
         this.license = license
@@ -46,5 +45,14 @@ export default class Project {
         this.repoUrl = repoUrl
         this.websiteUrl = websiteUrl
         this.sdgs = sdgs
+
+        this.contributionGuidelinesUrl = contributionGuidelinesUrl
+        this.logoUrl = logoUrl
+        this.starsUrl = starsUrl
+        this.numberContributors = numberContributors
+
+        this.frameworksUsed = frameworksUsed
+        this.licenseUrl = licenseUrl
+        this.naturalLanguages = naturalLanguages
     }
 }
