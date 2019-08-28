@@ -2,6 +2,8 @@ import 'normalize.css'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
+
+import vueNcform from '@ncform/ncform'
 import router from './modules/router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -15,6 +17,11 @@ library.add(regStar)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(VueRouter)
+Vue.use(vueNcform, {
+  extComponents: [
+  ],
+  lang: 'en-gb',
+})
 
 Vue.config.productionTip = false
 

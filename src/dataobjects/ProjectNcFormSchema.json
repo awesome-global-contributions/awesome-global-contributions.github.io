@@ -1,0 +1,360 @@
+{
+  "comment1": "This schema can be tested live here: https://ncform.github.io/ncform/ncform-show/playground/index.html",
+  "comment2": "Config details: https://github.com/ncform/ncform/blob/master/CONFIG.md",
+  "comment3": "Standard Components: https://ncform.github.io/ncform/ncform-theme-elementui/index.html",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "ui": {
+        "label": "Name"
+      }
+    },
+    "description": {
+      "type": "string",
+      "ui": {
+        "label": "Description",
+        "description": "Note: supports markdown",
+        "widget": "textarea",
+        "widgetConfig": {
+          "rows": 3,
+          "autoSize": {
+            "minRows": 2,
+            "maxRows": 5
+          }
+        }
+      }
+    },
+    "license": {
+      "type": "string",
+      "ui": {
+        "label": "License",
+        "widget": "select",
+        "widgetConfig": {
+          "filterable": true,
+          "itemTemplate": "<span>{{item.value}}: {{item.longName}}</span>",
+          "enumSource": [
+            { "value": "BSD-2-Clause", "longName": "2-clause BSD License" },
+            { "value": "BSD-3-Clause", "longName": "3-clause BSD License" },
+            { "value": "AFL-3.0", "longName": "Academic Free License 3.0" },
+            { "value": "APL-1.0", "longName": "Adaptive Public License" },
+            { "value": "Apache-2.0", "longName": "Apache License 2.0" },
+            { "value": "APSL-2.0", "longName": "Apple Public Source License" },
+            { "value": "Artistic-2.0", "longName": "Artistic License 2.0" },
+            { "value": "AAL", "longName": "Attribution Assurance License" },
+            { "value": "BSL-1.0", "longName": "Boost Software License" },
+            { "value": "BSDplusPatent", "longName": "BSD+Patent" },
+            { "value": "CECILL-2.1", "longName": "CeCILL License 2.1" },
+            { "value": "CATOSL-1.1", "longName": "Computer Associates Trusted Open Source License 1.1" },
+            { "value": "CDDL-1.0", "longName": "Common Development and Distribution License 1.0" },
+            { "value": "CPAL-1.0", "longName": "Common Public Attribution License 1.0" },
+            { "value": "EUDatagrid", "longName": "EU DataGrid Software License" },
+            { "value": "EPL-1.0", "longName": "Eclipse Public License 1.0" },
+            { "value": "EPL-2.0", "longName": "Eclipse Public License 2.0" },
+            { "value": "eCos-2.0", "longName": "eCos License version 2.0" },
+            { "value": "ECL-2.0", "longName": "Educational Community License, Version 2.0" },
+            { "value": "EFL-2.0", "longName": "Eiffel Forum License V2.0" },
+            { "value": "Entessa", "longName": "Entessa Public License" },
+            { "value": "EUPL-1.1", "longName": "European Union Public License, Version 1.2" },
+            { "value": "Fair", "longName": "Fair License" },
+            { "value": "Frameworx-1.0", "longName": "Frameworx License" },
+            { "value": "FPL-1.0.0", "longName": "Free Public License 1.0.0" },
+            { "value": "AGPL-3.0", "longName": "GNU Affero General Public License version 3" },
+            { "value": "GPL-2.0", "longName": "GNU General Public License version 2" },
+            { "value": "GPL-3.0", "longName": "GNU General Public License version 3" },
+            { "value": "LGPL-2.1", "longName": "GNU Lesser General Public License version 2.1" },
+            { "value": "LGPL-3.0", "longName": "GNU Lesser General Public License version 3" },
+            { "value": "HPND", "longName": "Historical Permission Notice and Disclaimer" },
+            { "value": "IPL-1.0", "longName": "IBM Public License 1.0" },
+            { "value": "IPA", "longName": "IPA Font License" },
+            { "value": "ISC", "longName": "ISC License" },
+            { "value": "LPPL-1.3c", "longName": "LaTeX Project Public License 1.3c" },
+            { "value": "BSD-3-Clause-LBNL", "longName": "Lawrence Berkeley National Labs BSD Variant License" },
+            { "value": "LiLiQ-P-1.1", "longName": "Licence Libre du Québec – Permissive" },
+            { "value": "LiLiQ-R-1.1", "longName": "Licence Libre du Québec – Réciprocité" },
+            { "value": "LiLiQ-Rplus-1.1", "longName": "Licence Libre du Québec – Réciprocité forte" },
+            { "value": "LPL-1.02", "longName": "Lucent Public License Version 1.02" },
+            { "value": "MirOS", "longName": "MirOS Licence" },
+            { "value": "MS-PL", "longName": "Microsoft Public License" },
+            { "value": "MS-RL", "longName": "Microsoft Reciprocal License" },
+            { "value": "MIT", "longName": "MIT License" },
+            { "value": "Motosoto", "longName": "Motosoto License" },
+            { "value": "MPL-1.0", "longName": "Mozilla Public License 1.0" },
+            { "value": "MPL-1.1", "longName": "Mozilla Public License 1.1" },
+            { "value": "MPL-2.0", "longName": "Mozilla Public License 2.0" },
+            { "value": "Multics", "longName": "Multics License" },
+            { "value": "NASA-1.3", "longName": "NASA Open Source Agreement 1.3" },
+            { "value": "NTP", "longName": "NTP License" },
+            { "value": "Naumen", "longName": "Naumen Public License" },
+            { "value": "NGPL", "longName": "Nethack General Public License" },
+            { "value": "Nokia", "longName": "Nokia Open Source License" },
+            { "value": "NPOSL-3.0", "longName": "Non-Profit Open Software License 3.0" },
+            { "value": "OCLC-2.0", "longName": "OCLC Research Public License 2.0" },
+            { "value": "OGTSL", "longName": "Open Group Test Suite License" },
+            { "value": "OSL-3.0", "longName": "Open Software License 3.0" },
+            { "value": "OPL-2.1", "longName": "OSET Public License version 2.1" },
+            { "value": "PHP-3.0", "longName": "PHP License 3.0" },
+            { "value": "PostgreSQL", "longName": "The PostgreSQL License" },
+            { "value": "Python-2.0", "longName": "Python License" },
+            { "value": "CNRI-Python", "longName": "CNRI Python license" },
+            { "value": "QPL-1.0", "longName": "Q Public License" },
+            { "value": "RPSL-1.0", "longName": "RealNetworks Public Source License V1.0" },
+            { "value": "RPL-1.5", "longName": "Reciprocal Public License 1.5" },
+            { "value": "RSCPL", "longName": "Ricoh Source Code Public License" },
+            { "value": "OFL-1.1", "longName": "SIL Open Font License 1.1" },
+            { "value": "SimPL-2.0", "longName": "Simple Public License 2.0" },
+            { "value": "Sleepycat", "longName": "Sleepycat License" },
+            { "value": "SPL-1.0", "longName": "Sun Public License 1.0" },
+            { "value": "Watcom-1.0", "longName": "Sybase Open Watcom Public License 1.0" },
+            { "value": "NCSA", "longName": "University of Illinois/NCSA Open Source License" },
+            { "value": "UPL", "longName": "Universal Permissive License" },
+            { "value": "UCL-1.0", "longName": "Upstream Compatibility License v1.0" },
+            { "value": "VSL-1.0", "longName": "Vovida Software License v. 1.0" },
+            { "value": "W3C", "longName": "W3C License" },
+            { "value": "WXwindows", "longName": "wxWindows Library License" },
+            { "value": "Xnet", "longName": "X.Net License" },
+            { "value": "0BSD", "longName": "Zero-Clause BSD" },
+            { "value": "ZPL-2.0", "longName": "Zope Public License 2.0" },
+            { "value": "Zlib", "longName": "zlib/libpng license" }
+          ]
+        }
+      }
+    },
+    "programmingLanguages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "ui": {
+          "label": "language"
+        }
+      },
+      "ui": {
+        "label": "Used programming languages"
+      },
+      "rules": {
+        "pattern": "[^A-Z]+"
+      }
+    },
+    "rating": {
+      "type": "integer",
+      "ui": {
+        "label": "Rating",
+        "widget": "rate",
+        "widgetConfig": {
+          "showScore": true
+        }
+      }
+    },
+    "repoUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url of the repository",
+        "preview": {
+          "type": "link"
+        }
+      },
+      "rules": {
+        "url": true
+      }
+    },
+    "websiteUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url of the website",
+        "preview": {
+          "type": "link"
+        }
+      },
+      "rules": {
+        "url": true
+      }
+    },
+    "sdgs": {
+      "type": "array",
+      "ui": {
+        "label": "SDGs",
+        "widget": "select",
+        "widgetConfig": {
+          "multiple": true,
+          "filterable": true,
+          "itemTemplate": "<span>{{item.value}}: {{item.name}}</span>",
+          "enumSource": [
+            { "value": 1, "name": "No Poverty" },
+            { "value": 2, "name": "Zero Hunger" },
+            { "value": 3, "name": "Good Health and Well-Being" },
+            { "value": 4, "name": "Quality Education" },
+            { "value": 5, "name": "Gender Equality" },
+            { "value": 6, "name": "Clean Water and Sanitation" },
+            { "value": 7, "name": "Affordable and Clean Energy" },
+            { "value": 8, "name": "Decent Work and Economic Growth" },
+            { "value": 9, "name": "Industry, Innovation and Infrastructure" },
+            { "value": 10, "name": "Reduced Inequalities" },
+            { "value": 11, "name": "Sustainable Cities and Communities" },
+            { "value": 12, "name": "Responsible Consumption and Production" },
+            { "value": 13, "name": "Climate Action" },
+            { "value": 14, "name": "Life below Water" },
+            { "value": 15, "name": "Life on Land" },
+            { "value": 16, "name": "Peace, Justice and Strong Institutions" },
+            { "value": 17, "name": "Partnerships for the Goals" }
+          ]
+        }
+      },
+      "rules": {
+        "uniqueItems": true
+      }
+    },
+    "contributionGuidelinesUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url of the Contribution Guideline",
+        "preview": {
+          "type": "link"
+        }
+      },
+      "rules": {
+        "url": true
+      }
+    },
+    "logoUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url of the Logo",
+        "preview": {
+          "type": "image"
+        }
+      },
+      "rules": {
+        "url": true
+      }
+    },
+    "starsUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url to the Stars SVG",
+        "preview": {
+          "type": "image"
+        }
+      },
+      "rules": {
+        "url": true
+      }
+    },
+    "numberContributors": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "ui": {
+            "label": "url",
+            "preview": {
+              "type": "link"
+            }
+          },
+          "rules": {
+            "url": true
+          }
+        },
+        "format": {
+          "type": "string",
+          "ui": {
+            "label": "Format of the response",
+            "widget": "radio",
+            "widgetConfig": {
+              "type": "button",
+              "itemLabelField": "value",
+              "enumSource": [
+                { "value": "json" },
+                { "value": "yaml" },
+                { "value": "xml" }
+              ]
+            }
+          }
+        },
+        "accessor": {
+          "type": "string",
+          "ui": {
+            "label": "How can it be accessed?"
+          }
+        }
+      },
+      "ui": {
+        "label": "Query to get the Number of contributors"
+      }
+    },
+    "ratingComment": {
+      "type": "string",
+      "ui": {
+        "label": "Rating comment"
+      }
+    },
+    "otherLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "ui": {
+              "label": "name"
+            }
+          },
+          "description": {
+            "type": "string",
+            "ui": {
+              "label": "description"
+            }
+          },
+          "link": {
+            "type": "string",
+            "ui": {
+              "label": "link"
+            },
+            "rules": {
+                "url": true
+            }
+          }
+        },
+        "ui": {
+          "label": "Link information"
+        }
+      },
+      "ui": {
+        "label": "Other potentially useful links"
+      }
+    },
+    "frameworksUsed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "ui": {
+          "label": "Framework"
+        }
+      },
+      "ui": {
+        "label": "Used frameworks"
+      }
+    },
+    "licenseUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url to the License"
+      },
+      "rules": {
+        "url": true
+      }
+    },
+    "naturalLanguages": {
+      "type": "array",
+      "default": [ "English" ],
+      "items": {
+        "type": "string",
+        "ui": {
+          "label": "Language"
+        }
+      },
+      "ui": {
+        "label": "Spoken Languages of the project"
+      }
+    }
+  }
+}
