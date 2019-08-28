@@ -12,6 +12,8 @@
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
+    "@ncform/ncform": "^1.4.0",
+    "@ncform/ncform-common": "^1.4.0",
     "@types/dompurify": "0.0.33",
     "@types/marked": "^0.6.5",
     "core-js": "^2.6.5",
