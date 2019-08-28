@@ -1,11 +1,18 @@
 <template>
-  <div class="wrapper"></div>
+  <div class="wrapper">
+    <ProjectForm/>
+  </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
+  import ProjectForm from '../components/ProjectForm.vue'
 
-  @Component({})
+  @Component({
+    components: {
+      ProjectForm
+    },
+  })
   export default class CreatePage extends Vue {}
 </script>
 
