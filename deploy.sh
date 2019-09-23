@@ -10,8 +10,9 @@ npm run lint
 echo Building...
 npm run build
 
-# copy readme
+# copy readme & license
 cp dist_README.md dist/README.md
+cp LICENSE dist/LICENSE
 
 # deploy
 # 1. create new git repo in dist/
