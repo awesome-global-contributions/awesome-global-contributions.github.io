@@ -14,6 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import Project from '../dataobjects/Project'
+import { ProjectsMap } from '../dataobjects/Project'
 import SDG, { getAllSDGs } from '../dataobjects/SDG'
 import ProjectCard from './ProjectCard.vue'
 
@@ -23,7 +24,7 @@ import ProjectCard from './ProjectCard.vue'
     },
 })
 export default class App extends Vue {
-    @Prop(Array) public projects?: Project[]
+    @Prop(Object) public projects?: ProjectsMap
 
     private sdgProjects: Array<{sdg: SDG, projects: Project[]}> = []
 
@@ -51,10 +52,8 @@ export default class App extends Vue {
             return
         }
 
-        for (const project of this.projects) {
-            for (const sdgNr of project.sdgs) {
-                this.sdgProjects[sdgNr - 1].projects.push(project)
-            }
+        for (let i = 1; i <= 17; ++i) {
+            this.sdgProjects[i - 1].projects = (this.projects as any)[i]
         }
     }
 

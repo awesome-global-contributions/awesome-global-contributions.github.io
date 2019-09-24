@@ -21,7 +21,6 @@
            <p>websiteUrl:
                <a :href="this.project.websiteUrl">{{ this.project.websiteUrl }}</a>
            </p>
-           <p>sdgs: {{ this.project.sdgs.join(', ') }}</p>
        </div>
     </div>
 </template>

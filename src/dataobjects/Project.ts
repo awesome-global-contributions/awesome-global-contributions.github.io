@@ -91,3 +91,35 @@ export default class Project {
         this.naturalLanguagesLink = naturalLanguagesLink
     }
 }
+
+export interface ProjectsMap {
+    1: Project[]
+    2: Project[]
+    3: Project[]
+    4: Project[]
+    5: Project[]
+    6: Project[]
+    7: Project[]
+    8: Project[]
+    9: Project[]
+    10: Project[]
+    11: Project[]
+    12: Project[]
+}
+
+export function getEmptyProjectsMap(): ProjectsMap {
+    return {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+        11: [],
+        12: [],
+    }
+}
