@@ -2,7 +2,7 @@
     <div>
        <div v-if="project != null" class="project card">
            <h1 class="name">{{ this.project.name }}</h1>
-           <p class="description">{{ this.project.description }}</p>
+           <p class="description" v-html="renderedDescription"/>
            <p class="rating" :class="{ 'has-comment': project.ratingComment != undefined }" :title="project.ratingComment">
                 <font-awesome-icon v-for="i in project.rating" :key="i" class="filled star" :icon="['fas', 'star']"/>
                 <font-awesome-icon v-for="i in 10-project.rating" :key="project.rating+i" class="empty star" :icon="['far', 'star']"/>
@@ -34,12 +34,26 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import createDOMPurify from 'dompurify'
+import marked from 'marked'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import Project from '../dataobjects/Project'
 
 @Component({})
 export default class App extends Vue {
     @Prop(Project) public project?: Project
+    public renderedDescription: string = ''
+
+    private mounted() {
+        this.onProjectUpdate()
+    }
+
+    @Watch('project')
+    private onProjectUpdate(): void {
+        if (this.project) {
+            this.renderedDescription = createDOMPurify().sanitize(marked(this.project.description))
+        }
+    }
 }
 </script>
 
