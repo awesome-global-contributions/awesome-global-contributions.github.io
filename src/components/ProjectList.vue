@@ -23,7 +23,7 @@ import ProjectCard from './ProjectCard.vue'
         ProjectCard,
     },
 })
-export default class App extends Vue {
+export default class ProjectList extends Vue {
     @Prop(Object) public projects?: ProjectsMap
 
     private sdgProjects: Array<{sdg: SDG, projects: Project[]}> = []

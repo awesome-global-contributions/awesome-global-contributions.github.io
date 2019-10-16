@@ -40,7 +40,7 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import Project from '../dataobjects/Project'
 
 @Component({})
-export default class App extends Vue {
+export default class ProjectCard extends Vue {
     @Prop(Project) public project?: Project
     public renderedDescription: string = ''
 
