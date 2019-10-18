@@ -1,6 +1,6 @@
 <template>
     <div class="project-list">
-        <div v-for="sdgInfo in sdgProjects" :key="sdgInfo.sdg.number" class="project-sdg-list" :data-sdg="sdgInfo.sdg.number">
+        <div v-for="sdgInfo in filteredSdgProjects" :key="sdgInfo.sdg.number" class="project-sdg-list" :data-sdg="sdgInfo.sdg.number">
             <h1 class="sdg-heading">
                 <span class="sdg-number" >{{ sdgInfo.sdg.number }}.</span>{{ sdgInfo.sdg.name }}</h1>
             <p class="sdg-description"
@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import IFilter from '../dataobjects/IFilter'
 import Project from '../dataobjects/Project'
 import { ProjectsMap } from '../dataobjects/Project'
 import SDG, { getAllSDGs } from '../dataobjects/SDG'
@@ -25,12 +26,24 @@ import ProjectCard from './ProjectCard.vue'
 })
 export default class ProjectList extends Vue {
     @Prop(Object) public projects?: ProjectsMap
+    @Prop(Object) public filter?: IFilter
 
     private sdgProjects: Array<{sdg: SDG, projects: Project[]}> = []
 
     public created() {
         this.addSdgDescriptions()
         this.fillSdgProjects()
+    }
+
+    private get filteredSdgProjects(): Array<{sdg: SDG, projects: Project[]}> {
+        return this.sdgProjects.map((sdgProject) => {
+            return {
+                sdg: sdgProject.sdg,
+                projects: sdgProject.projects.filter((proj) => this.filter!.isAccepted(proj)),
+            }
+            }).filter((sdgProject) => {
+                return sdgProject.projects.length > 0
+            })
     }
 
     private addSdgDescriptions() {
@@ -53,7 +66,7 @@ export default class ProjectList extends Vue {
         }
 
         for (let i = 1; i <= 17; ++i) {
-            this.sdgProjects[i - 1].projects = (this.projects as any)[i]
+            this.sdgProjects[i - 1].projects = (this.projects as any)[i] || []
         }
     }
 

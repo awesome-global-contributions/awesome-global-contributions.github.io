@@ -4,7 +4,7 @@
             :filter="filter"
             v-on:filter-update="updateFilter"
             :projects="projects"/>
-         <ProjectList :projects="projects"/>
+         <ProjectList :projects="projects" :filter="filter"/>
     </div>
 </template>
 
