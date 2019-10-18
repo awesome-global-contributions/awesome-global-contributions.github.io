@@ -5,6 +5,11 @@
                 :tags="programmingLanguages"
                 v-model="filterProgrammingLanguages.allowedLanguages"/>
         </FilterWrapper>
+        <FilterWrapper name="Framework" :summary="frameworksSummary">
+            <TagFilter
+                :tags="frameworks"
+                v-model="filterFrameworks.allowedFrameworks"/>
+        </FilterWrapper>
         <FilterWrapper name="Natural Languages" :summary="naturalLanguagesSummary">
             <TagFilter
                 :tags="naturalLanguages"
@@ -38,6 +43,7 @@ export default class ProjectFilters extends Vue {
     @Prop() public projects!: ProjectsMap
 
     private programmingLanguages: string[] = []
+    private frameworks: string[] = []
     private naturalLanguages: string[] = []
 
     private filterFrameworks: FrameworksFilter = new FrameworksFilter()
@@ -79,9 +85,15 @@ export default class ProjectFilters extends Vue {
                     if (project.naturalLanguages) {
                         this.naturalLanguages.push(...project.naturalLanguages)
                     }
+                    if (project.frameworksUsed) {
+                        this.frameworks.push(...project.frameworksUsed)
+                    }
                 })
             }
             this.programmingLanguages = this.programmingLanguages
+                .filter(this.unique)
+                .sort()
+            this.frameworks = this.frameworks
                 .filter(this.unique)
                 .sort()
             this.naturalLanguages = this.naturalLanguages
@@ -92,6 +104,10 @@ export default class ProjectFilters extends Vue {
 
     get programmingLanguagesSummary() {
         return this.filterProgrammingLanguages.allowedLanguages.sort().join(', ')
+    }
+
+    get frameworksSummary() {
+        return this.filterFrameworks.allowedFrameworks.sort().join(', ')
     }
 
     get naturalLanguagesSummary() {
