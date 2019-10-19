@@ -15,6 +15,11 @@
                 :tags="naturalLanguages"
                 v-model="filterNaturalLanguages.allowedNaturalLanguages"/>
         </FilterWrapper>
+        <FilterWrapper name="Minimum Rating" :summary="ratingSummary">
+            <NumberFilter
+                :maxValue="10"
+                v-model="filterRating.minRating"/>
+        </FilterWrapper>
     </div>
 </template>
 
@@ -29,12 +34,14 @@ import SDGsFilter from '../dataobjects/filters/SDGsFilter'
 import IFilter from '../dataobjects/IFilter'
 import Project, { ProjectsMap } from '../dataobjects/Project'
 import FilterWrapper from './filter/FilterWrapper.vue'
+import NumberFilter from './filter/NumberFilter.vue'
 import TagFilter from './filter/TagFilter.vue'
 
 @Component({
     components: {
         FilterWrapper,
         TagFilter,
+        NumberFilter,
     },
 })
 export default class ProjectFilters extends Vue {
@@ -112,6 +119,10 @@ export default class ProjectFilters extends Vue {
 
     get naturalLanguagesSummary() {
         return this.filterNaturalLanguages.allowedNaturalLanguages.sort().join(', ')
+    }
+
+    get ratingSummary() {
+        return this.filterRating.minRating ? `At least ${this.filterRating.minRating}` : ''
     }
 
     private unique<T>(value: T, index: number, self: T[]) {
