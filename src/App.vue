@@ -3,7 +3,9 @@
          <ProjectFilters
             :filter="filter"
             v-on:filter-update="updateFilter"
-            :projects="projects"/>
+            :projects="projects"
+            @filterSummary="updateFilterSummary"/>
+        chosen filters: {{ filterSummary }}
          <ProjectList :projects="projects" :filter="filter"/>
     </div>
 </template>
@@ -27,6 +29,7 @@ import { requestAllProjects } from './modules/RequestAllProjects'
 export default class App extends Vue {
     public projects: ProjectsMap = getEmptyProjectsMap()
     public filter: IFilter|null = null
+    public filterSummary: string = ''
 
     public mounted() {
         requestAllProjects().then((projects) => this.projects = projects)
@@ -34,6 +37,10 @@ export default class App extends Vue {
 
     private updateFilter(filter: IFilter) {
         this.filter = filter
+    }
+
+    private updateFilterSummary(summary: string[]) {
+        this.filterSummary = summary.join(' AND ')
     }
 }
 </script>

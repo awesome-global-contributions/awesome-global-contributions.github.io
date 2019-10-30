@@ -125,6 +125,20 @@ export default class ProjectFilters extends Vue {
         return this.filterRating.minRating ? `At least ${this.filterRating.minRating}` : ''
     }
 
+    @Watch('programmingLanguagesSummary')
+    @Watch('frameworksSummary')
+    @Watch('naturalLanguagesSummary')
+    @Watch('ratingSummary')
+    @Emit('filterSummary')
+    private filterSummary() {
+        return [
+            this.programmingLanguagesSummary,
+            this.frameworksSummary,
+            this.naturalLanguagesSummary,
+            this.ratingSummary,
+        ]
+    }
+
     private unique<T>(value: T, index: number, self: T[]) {
         return self.indexOf(value) === index
     }
