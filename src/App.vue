@@ -1,19 +1,19 @@
 <template>
     <div id="app">
-         <ProjectFilters
+        <TopBar
             :filter="filter"
             v-on:filter-update="updateFilter"
             :projects="projects"
             @filterSummary="updateFilterSummary"/>
         chosen filters: {{ filterSummary }}
-         <ProjectList :projects="projects" :filter="filter"/>
+        <ProjectList :projects="projects" :filter="filter"/>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import ProjectFilters from './components/ProjectFilters.vue'
 import ProjectList from './components/ProjectList.vue'
+import TopBar from './components/TopBar.vue'
 import CombinedFilter from './dataobjects/filters/CombinedFilter'
 import IFilter from './dataobjects/IFilter'
 import Project from './dataobjects/Project'
@@ -23,7 +23,7 @@ import { requestAllProjects } from './modules/RequestAllProjects'
 @Component({
     components: {
         ProjectList,
-        ProjectFilters,
+        TopBar,
     },
 })
 export default class App extends Vue {
