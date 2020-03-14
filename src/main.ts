@@ -11,15 +11,19 @@ import { faStar as regStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+import ncformStdComps from '@ncform/ncform-theme-elementui'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 library.add(faStar)
 library.add(regStar)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(VueRouter)
+Vue.use(Element)
 Vue.use(vueNcform, {
-  extComponents: [
-  ],
+  extComponents: ncformStdComps,
   lang: 'en-gb',
 })
 
