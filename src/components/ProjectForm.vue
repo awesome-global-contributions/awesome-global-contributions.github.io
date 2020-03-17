@@ -12,14 +12,7 @@
   import ProjectJson from '../dataobjects/ProjectJson'
   import formSchema from '../dataobjects/ProjectNcFormSchema.json'
 
-  @Component({})
-  export default class ProjectForm extends Vue {
-    public projectData!: ProjectJson
-
-    private schema: any = null
-
-    public created() {
-      this.projectData = {
+  export const defaultProjectData: ProjectJson = {
         name: '',
         description: '',
         license: '',
@@ -30,6 +23,14 @@
         sdgs: [],
       }
 
+  @Component({})
+  export default class ProjectForm extends Vue {
+    public projectData!: ProjectJson
+
+    private schema: any = null
+
+    public created() {
+      this.projectData = defaultProjectData
       this.schema = formSchema
     }
 

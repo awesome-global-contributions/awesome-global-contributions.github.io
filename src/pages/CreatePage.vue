@@ -14,7 +14,7 @@
 <script lang="ts">
 import jsYaml from 'js-yaml'
 import { Component, Vue } from 'vue-property-decorator'
-import ProjectForm from '../components/ProjectForm.vue'
+import ProjectForm, { defaultProjectData } from '../components/ProjectForm.vue'
 import YamlViewer from '../components/YamlViewer.vue'
 import ProjectJson from '../dataobjects/ProjectJson'
 
@@ -27,6 +27,11 @@ import ProjectJson from '../dataobjects/ProjectJson'
 export default class CreatePage extends Vue {
   private project!: ProjectJson
   private projectAsYamlString: string = ''
+
+  public created() {
+    this.project = defaultProjectData
+    this.projectAsYamlString = jsYaml.safeDump(this.project)
+  }
 
   public updateJson(json: any) {
     this.project = json
