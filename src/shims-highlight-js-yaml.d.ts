@@ -1,1 +1,1 @@
-declare module 'highlight.js/lib/languages/yaml';
+declare module 'highlight.js/lib/languages/yaml'
