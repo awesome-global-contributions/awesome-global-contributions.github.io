@@ -1,11 +1,10 @@
 <template>
-  <div class="wrapper">
-    <ncform v-if="schema"
-      :form-schema="schema"
-      form-name="ProjectCreate"
-      v-model="projectData">
-    </ncform>
-  </div>
+  <ncform v-if="schema"
+    :form-schema="schema"
+    form-name="ProjectCreate"
+    v-model="projectData"
+    @change="updateJson">
+  </ncform>
 </template>
 
 <script lang="ts">
@@ -34,9 +33,8 @@
       this.schema = formSchema
     }
 
-    @Emit('update-json')
-    @Watch('projectData')
-    public updateJson() {
+    @Emit('updateJson')
+    public updateJson(params: any) {
       return this.projectData
     }
   }
