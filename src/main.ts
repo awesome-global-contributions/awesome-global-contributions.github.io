@@ -15,6 +15,10 @@ import ncformStdComps from '@ncform/ncform-theme-elementui'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import yaml from 'highlight.js/lib/languages/yaml'
+import 'highlight.js/styles/default.css'
+import VueHighlightJs from 'vue-highlight.js'
+
 library.add(faStar)
 library.add(regStar)
 
@@ -22,6 +26,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(VueRouter)
 Vue.use(Element)
+Vue.use(VueHighlightJs, {
+  languages: {
+    yaml,
+  },
+})
 Vue.use(vueNcform, {
   extComponents: ncformStdComps,
   lang: 'en-gb',
