@@ -4,10 +4,38 @@
   "comment3": "Standard Components: https://ncform.github.io/ncform/ncform-theme-elementui/index.html",
   "type": "object",
   "properties": {
+    "repoUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url of the repository",
+        "preview": {
+          "type": "link"
+        }
+      },
+      "rules": {
+        "required": {
+          "value": true,
+          "errMsg": "Project url is required!"
+        },
+        "url": {
+          "value": true,
+          "options": {
+            "delay": 300,
+            "delayMsg": ""
+          }
+        }
+      }
+    },
     "name": {
       "type": "string",
       "ui": {
         "label": "Name"
+      },
+      "rules": {
+        "required": {
+          "value": true,
+          "errMsg": "Project name is required!"
+        }
       }
     },
     "description": {
@@ -21,6 +49,35 @@
           "autoSize": {
             "minRows": 2,
             "maxRows": 5
+          }
+        }
+      },
+      "rules": {
+        "required": {
+          "value": true,
+          "errMsg": "Project Description is required!"
+        }
+      }
+
+    },
+    "websiteUrl": {
+      "type": "string",
+      "ui": {
+        "label": "Url of the website",
+        "preview": {
+          "type": "link"
+        }
+      },
+      "rules": {
+        "required": {
+          "value": true,
+          "errMsg": "Project website is required! (if it doesn't have a dedicated one use the README)"
+        },
+        "url": {
+          "value": true,
+          "options": {
+            "delay": 300,
+            "delayMsg": ""
           }
         }
       }
@@ -118,55 +175,12 @@
             { "value": "Zlib", "longName": "zlib/libpng license" }
           ]
         }
-      }
-    },
-    "programmingLanguages": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "ui": {
-          "label": "language"
-        }
-      },
-      "ui": {
-        "label": "Used programming languages"
       },
       "rules": {
-        "pattern": "[^A-Z]+"
-      }
-    },
-    "rating": {
-      "type": "integer",
-      "ui": {
-        "label": "Rating",
-        "widget": "rate",
-        "widgetConfig": {
-          "showScore": true
+        "required": {
+          "value": true,
+          "errMsg": "License is required!"
         }
-      }
-    },
-    "repoUrl": {
-      "type": "string",
-      "ui": {
-        "label": "Url of the repository",
-        "preview": {
-          "type": "link"
-        }
-      },
-      "rules": {
-        "url": true
-      }
-    },
-    "websiteUrl": {
-      "type": "string",
-      "ui": {
-        "label": "Url of the website",
-        "preview": {
-          "type": "link"
-        }
-      },
-      "rules": {
-        "url": true
       }
     },
     "sdgs": {
@@ -200,7 +214,36 @@
         }
       },
       "rules": {
-        "uniqueItems": true
+        "uniqueItems": true,
+        "required": {
+          "value": true,
+          "errMsg": "At least one SDG is required!"
+        }
+      }
+    },
+    "programmingLanguages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "ui": {
+          "label": "language"
+        }
+      },
+      "ui": {
+        "label": "Used programming languages"
+      },
+      "rules": {
+        "pattern": "[^A-Z ]+"
+      }
+    },
+    "rating": {
+      "type": "integer",
+      "ui": {
+        "label": "Rating",
+        "widget": "rate",
+        "widgetConfig": {
+          "showScore": true
+        }
       }
     },
     "contributionGuidelinesUrl": {
@@ -212,7 +255,13 @@
         }
       },
       "rules": {
-        "url": true
+        "url": {
+          "value": true,
+          "options": {
+            "delay": 300,
+            "delayMsg": ""
+          }
+        }
       }
     },
     "logoUrl": {
@@ -224,7 +273,13 @@
         }
       },
       "rules": {
-        "url": true
+        "url": {
+          "value": true,
+          "options": {
+            "delay": 300,
+            "delayMsg": ""
+          }
+        }
       }
     },
     "starsUrl": {
@@ -236,7 +291,13 @@
         }
       },
       "rules": {
-        "url": true
+        "url": {
+          "value": true,
+          "options": {
+            "delay": 300,
+            "delayMsg": ""
+          }
+        }
       }
     },
     "numberContributors": {
@@ -251,7 +312,13 @@
             }
           },
           "rules": {
-            "url": true
+            "url": {
+              "value": true,
+              "options": {
+                "delay": 300,
+                "delayMsg": ""
+              }
+            }
           }
         },
         "format": {
@@ -310,7 +377,13 @@
               "label": "link"
             },
             "rules": {
-                "url": true
+              "url": {
+                "value": true,
+                "options": {
+                  "delay": 300,
+                  "delayMsg": ""
+                }
+              }
             }
           }
         },
@@ -340,7 +413,13 @@
         "label": "Url to the License"
       },
       "rules": {
-        "url": true
+        "url": {
+          "value": true,
+          "options": {
+            "delay": 300,
+            "delayMsg": ""
+          }
+        }
       }
     },
     "naturalLanguages": {
