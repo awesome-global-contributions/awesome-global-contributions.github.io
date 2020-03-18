@@ -247,6 +247,12 @@
         }
       }
     },
+    "ratingComment": {
+      "type": "string",
+      "ui": {
+        "label": "Rating comment"
+      }
+    },
     "contributionGuidelinesUrl": {
       "type": "string",
       "ui": {
@@ -349,12 +355,6 @@
         "label": "Query to get the Number of contributors"
       }
     },
-    "ratingComment": {
-      "type": "string",
-      "ui": {
-        "label": "Rating comment"
-      }
-    },
     "otherLinks": {
       "type": "array",
       "items": {
@@ -411,7 +411,10 @@
     "licenseUrl": {
       "type": "string",
       "ui": {
-        "label": "Url to the License"
+        "label": "Url to the License",
+        "preview": {
+          "type": "link"
+        }
       },
       "rules": {
         "url": {
