@@ -86,6 +86,7 @@
       "type": "string",
       "ui": {
         "label": "License",
+        "description": "Note: This list includes all licenses accepted by the Open Source Initiative. If the license a project does not match any of these, you can override it in the file of your PR, but please mention it in your PR description.",
         "widget": "select",
         "widgetConfig": {
           "filterable": true,
