@@ -65,7 +65,7 @@ export default class CreatePage extends Vue {
   public updateProject(json: any) {
     this.project = json
     // note that this automatically uses a max width of 80
-    // as we want for yamllint
+    // as we want for yamllint, but fails if there is no whitespace
     this.projectAsYamlString = jsYaml.safeDump(this.project)
   }
 
@@ -91,6 +91,9 @@ export default class CreatePage extends Vue {
             })
           },
           (reason) => console.error(reason))
+        .then(() => {
+          this.projectAsYamlString = jsYaml.safeDump(this.project)
+        })
     }
   }
 }
