@@ -1,8 +1,14 @@
 import ProjectJson from '@/dataobjects/ProjectJson'
 import { ProjectAutoFillKeyValuePair } from '../Autofill'
+import { extractContributionGuidelinesUrl } from './github/extractContributionGuidelinesUrl'
+import { extractContributors } from './github/extractContributors'
+import { extractDescription } from './github/extractDescription'
+import { extractLanguages } from './github/extractLanguages'
 import { extractLicense } from './github/extractLicense'
 import { extractLicenseUrl } from './github/extractLicenseUrl'
 import { extractName } from './github/extractName'
+import { extractStarsUrl } from './github/extractStarsUrl'
+import { extractWebsiteUrl } from './github/extractWebsiteUrl'
 
 export const githubRecognitionRegex = /^(https?:\/\/)?(www\.)?github\.com\/([^\/]+)\/([^\/]+)\/?$/i
 
@@ -34,6 +40,7 @@ export interface GithubRepoResponse {
     description?: string
     homepage?: string
     contributors_url: string
+    languages_url: string
 }
 
 export type GithubResolver<K extends keyof ProjectJson> =
@@ -66,8 +73,14 @@ export function githubAutofill(url: string): Promise<Array<ProjectAutoFillKeyVal
         .catch((err) => { throw new Error('fetch failed because: ' + err) })
 
     return Promise.all([
-        repositoryInfos.then(extractName(githubInfo)),
+        repositoryInfos.then(extractContributionGuidelinesUrl(githubInfo)),
+        repositoryInfos.then(extractContributors(githubInfo)),
+        repositoryInfos.then(extractDescription(githubInfo)),
+        repositoryInfos.then(extractLanguages(githubInfo)),
         repositoryInfos.then(extractLicense(githubInfo)),
         repositoryInfos.then(extractLicenseUrl(githubInfo)),
+        repositoryInfos.then(extractName(githubInfo)),
+        repositoryInfos.then(extractStarsUrl(githubInfo)),
+        repositoryInfos.then(extractWebsiteUrl(githubInfo)),
     ])
 }
