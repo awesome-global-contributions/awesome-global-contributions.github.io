@@ -16,6 +16,7 @@
       <el-button
         v-if="project != undefined && project.repoUrl != undefined && /https?:\/\/.*\..*/.test(project.repoUrl)"
         type="primary"
+        :loading="autofillInProgress"
         @click="autofill">Autofill based on URL: '{{ project.repoUrl }}'</el-button>
       <ProjectForm
         :project="project"
@@ -57,6 +58,8 @@ export default class CreatePage extends Vue {
   private project!: ProjectJson
   private projectAsYamlString: string = ''
 
+  private autofillInProgress: boolean = false
+
   public created() {
     this.project = defaultProjectData
     this.projectAsYamlString = jsYaml.safeDump(this.project)
@@ -75,6 +78,8 @@ export default class CreatePage extends Vue {
         // tslint:disable-next-line:triple-equals
         && this.project.repoUrl != undefined
         && /https?:\/\/.*\..*/.test(this.project.repoUrl)) {
+      this.showAutoFillInProgress()
+
       const repoUrl = this.project.repoUrl
 
       autofill(repoUrl)
@@ -90,11 +95,25 @@ export default class CreatePage extends Vue {
               }
             })
           },
-          (reason) => console.error(reason))
+        )
         .then(() => {
           this.projectAsYamlString = jsYaml.safeDump(this.project)
         })
+        .catch((err) => {
+          console.error({err})
+        })
+        .then(() => {
+          this.showAutoFillFinished()
+        })
     }
+  }
+
+  private showAutoFillInProgress(): void {
+    this.autofillInProgress = true
+  }
+
+  private showAutoFillFinished(): void {
+    this.autofillInProgress = false
   }
 }
 </script>
