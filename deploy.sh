@@ -4,7 +4,7 @@
 set -e
 
 # build
-echo Linting
+echo Linting...
 npm run lint
 
 echo Building...
@@ -15,6 +15,7 @@ cp dist_README.md dist/README.md
 cp LICENSE dist/LICENSE
 
 # deploy
+echo Deploying...
 # 1. create new git repo in dist/
 cd dist
 git init
