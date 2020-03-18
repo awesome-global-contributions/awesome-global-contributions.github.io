@@ -85,12 +85,10 @@ export default class CreatePage extends Vue {
               if (kvp.failed) {
                 fails.push(kvp)
               // tslint:disable-next-line:triple-equals
-              } else if (this.project[kvp.key] == undefined || this.project[kvp.key] === '') {
+              } else {
                 this.$set(this.project, kvp.key, kvp.value)
               }
             })
-
-            console.log({project: this.project, fails})
           },
           (reason) => console.error(reason))
     }
