@@ -14,7 +14,8 @@
         Thank you for adding a project to this list ♥        
       </p>
       <ProjectForm
-        @updateJson="updateJson"/>
+        :project="project"
+        @updateProject="updateProject"/>
     </el-tab-pane>
     <el-tab-pane label="Preview">
       <YamlViewer
@@ -26,9 +27,20 @@
 <script lang="ts">
 import jsYaml from 'js-yaml'
 import { Component, Vue } from 'vue-property-decorator'
-import ProjectForm, { defaultProjectData } from '../components/ProjectForm.vue'
+import ProjectForm from '../components/ProjectForm.vue'
 import YamlViewer from '../components/YamlViewer.vue'
 import ProjectJson from '../dataobjects/ProjectJson'
+
+const defaultProjectData: ProjectJson = {
+      name: '',
+      description: '',
+      license: '',
+      programmingLanguages: [],
+      rating: 0,
+      repoUrl: '',
+      websiteUrl: '',
+      sdgs: [],
+    }
 
 @Component({
   components: {
@@ -45,7 +57,7 @@ export default class CreatePage extends Vue {
     this.projectAsYamlString = jsYaml.safeDump(this.project)
   }
 
-  public updateJson(json: any) {
+  public updateProject(json: any) {
     this.project = json
     // note that this automatically uses a max width of 80
     // as we want for yamllint
