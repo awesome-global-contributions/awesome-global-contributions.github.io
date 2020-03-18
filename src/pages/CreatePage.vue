@@ -21,6 +21,39 @@
       <ProjectForm
         :project="project"
         @updateProject="updateProject"/>
+
+      <el-dialog
+          title="Some properties could not be auto-filled"
+          :visible.sync="autofillFailsDialogVisible"
+          width="50%"
+          center>
+        <span>It seems like some autofills failed:</span>
+
+        <ul>
+          <li
+              v-for="fail in autofillFailures"
+              :key="fail.key"
+              >
+            {{ fail.key }}: {{ fail.failReason }}
+          </li>
+        </ul>
+
+        <p
+            v-for="msg in autofillFailureAdditionalMessages"
+            :key="msg"
+            >
+          {{msg}}
+        </p>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button
+              type="primary"
+              @click="autofillFailsDialogVisible = false; autofillFailureAdditionalMessages = []; autofillFailureAdditionalMessages = []"
+              >
+            Okay, got it
+          </el-button>
+        </span>
+      </el-dialog>
     </el-tab-pane>
     <el-tab-pane label="Preview">
       <YamlViewer
@@ -35,7 +68,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import ProjectForm from '../components/ProjectForm.vue'
 import YamlViewer from '../components/YamlViewer.vue'
 import ProjectJson from '../dataobjects/ProjectJson'
-import { autofill, ProjectAutoFillKeyValuePair } from '../modules/Autofill'
+import { autofill, ProjectAutoFillKeyValuePair, ProjectAutoFillKeyValuePairFailed } from '../modules/Autofill'
 
 const defaultProjectData: ProjectJson = {
       name: '',
@@ -59,6 +92,9 @@ export default class CreatePage extends Vue {
   private projectAsYamlString: string = ''
 
   private autofillInProgress: boolean = false
+  private autofillFailsDialogVisible: boolean = false
+  private autofillFailures: Array<ProjectAutoFillKeyValuePairFailed<keyof ProjectJson>> = []
+  private autofillFailureAdditionalMessages: string[] = []
 
   public created() {
     this.project = defaultProjectData
@@ -85,22 +121,39 @@ export default class CreatePage extends Vue {
       autofill(repoUrl)
         .then(
           (autoFetchedData) => {
-            const fails: Array<ProjectAutoFillKeyValuePair<keyof ProjectJson>> = []
+            this.autofillFailures = []
+
             autoFetchedData.forEach((kvp) => {
               if (kvp.failed) {
-                fails.push(kvp)
+                this.autofillFailures.push(kvp)
               // tslint:disable-next-line:triple-equals
               } else {
                 this.$set(this.project, kvp.key, kvp.value)
               }
             })
+
+            if (this.autofillFailures.length !== 0) {
+              this.autofillFailsDialogVisible = true
+
+              if (this.autofillFailures.length >= 3) {
+                this.autofillFailureAdditionalMessages
+                  .push('If you\'ve used autofill a lot today note that GitHub only'
+                    + 'allows a certain amount of calls to their API')
+              }
+            }
           },
         )
+        .catch((err) => {
+          this.autofillFailsDialogVisible = true
+          this.autofillFailureAdditionalMessages.push('The entire autofill seems to have failed: ' + err)
+        })
         .then(() => {
           this.projectAsYamlString = jsYaml.safeDump(this.project)
         })
         .catch((err) => {
-          console.error({err})
+          this.autofillFailsDialogVisible = true
+          this.autofillFailureAdditionalMessages.push('Could not properly convert to YAML (most '
+            + 'likely an attribute is undefined)')
         })
         .then(() => {
           this.showAutoFillFinished()
