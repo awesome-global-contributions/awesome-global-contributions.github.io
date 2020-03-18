@@ -13,6 +13,10 @@
       <p>
         Thank you for adding a project to this list ♥        
       </p>
+      <el-button
+        v-if="project != undefined && project.repoUrl != undefined && /https?:\/\/.*\..*/.test(project.repoUrl)"
+        type="primary"
+        @click="autofill">Autofill based on URL: '{{ project.repoUrl }}'</el-button>
       <ProjectForm
         :project="project"
         @updateProject="updateProject"/>
@@ -30,6 +34,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import ProjectForm from '../components/ProjectForm.vue'
 import YamlViewer from '../components/YamlViewer.vue'
 import ProjectJson from '../dataobjects/ProjectJson'
+import { autofill, ProjectAutoFillKeyValuePair } from '../modules/Autofill'
 
 const defaultProjectData: ProjectJson = {
       name: '',
@@ -62,6 +67,33 @@ export default class CreatePage extends Vue {
     // note that this automatically uses a max width of 80
     // as we want for yamllint
     this.projectAsYamlString = jsYaml.safeDump(this.project)
+  }
+
+  public autofill() {
+    // tslint:disable-next-line:triple-equals
+    if (this.project != undefined
+        // tslint:disable-next-line:triple-equals
+        && this.project.repoUrl != undefined
+        && /https?:\/\/.*\..*/.test(this.project.repoUrl)) {
+      const repoUrl = this.project.repoUrl
+
+      autofill(repoUrl)
+        .then(
+          (autoFetchedData) => {
+            const fails: Array<ProjectAutoFillKeyValuePair<keyof ProjectJson>> = []
+            autoFetchedData.forEach((kvp) => {
+              if (kvp.failed) {
+                fails.push(kvp)
+              // tslint:disable-next-line:triple-equals
+              } else if (this.project[kvp.key] == undefined || this.project[kvp.key] === '') {
+                this.$set(this.project, kvp.key, kvp.value)
+              }
+            })
+
+            console.log({project: this.project, fails})
+          },
+          (reason) => console.error(reason))
+    }
   }
 }
 </script>
