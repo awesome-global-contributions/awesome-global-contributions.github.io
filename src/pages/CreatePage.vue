@@ -98,14 +98,18 @@ export default class CreatePage extends Vue {
 
   public created() {
     this.project = defaultProjectData
-    this.projectAsYamlString = jsYaml.safeDump(this.project)
+    this.updateYamlString()
   }
 
   public updateProject(json: any) {
     this.project = json
+    this.updateYamlString()
+  }
+
+  public updateYamlString() {
     // note that this automatically uses a max width of 80
     // as we want for yamllint, but fails if there is no whitespace
-    this.projectAsYamlString = jsYaml.safeDump(this.project)
+    this.projectAsYamlString = '---\n' + jsYaml.safeDump(this.project)
   }
 
   public autofill() {
@@ -148,7 +152,7 @@ export default class CreatePage extends Vue {
           this.autofillFailureAdditionalMessages.push('The entire autofill seems to have failed: ' + err)
         })
         .then(() => {
-          this.projectAsYamlString = jsYaml.safeDump(this.project)
+          this.updateYamlString()
         })
         .catch((err) => {
           this.autofillFailsDialogVisible = true
