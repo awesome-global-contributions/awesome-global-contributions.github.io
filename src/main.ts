@@ -4,11 +4,11 @@ import App from './App.vue'
 
 import vueNcform from '@ncform/ncform'
 import router from './modules/router'
+import compontents from './components/formElements'
 
 Vue.use(VueRouter)
 Vue.use(vueNcform, {
-  extComponents: [
-  ],
+  extComponents: compontents,
   lang: 'en-gb',
 })
 
